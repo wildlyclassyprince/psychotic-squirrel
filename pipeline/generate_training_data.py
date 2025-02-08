@@ -13,6 +13,7 @@ from logger import logger
 def get_customer_journey_df(
     sql_file: str = "customer_journeys.sql",
     base_path: Optional[Path] = Path("sql/ingestion/"),
+    params: dict = None,
 ) -> pd.DataFrame:
     try:
         file_path = base_path / sql_file
@@ -23,6 +24,7 @@ def get_customer_journey_df(
             return pd.read_sql_query(
                 query,
                 con=conn,
+                params=params,
             )
     except FileNotFoundError:
         logger.error(f"Error: SQL file not found in '{file_path}'")
@@ -91,7 +93,11 @@ def write_test_data_file(
 
 
 def main():
-    df = get_customer_journey_df()
+    params = {
+        "start_date": None,
+        "end_date": None,
+    }
+    df = get_customer_journey_df(params=params)
     df_test = create_test_dataset(df)
     write_test_data_file(df_test)
 
