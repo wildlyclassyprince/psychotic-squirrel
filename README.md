@@ -6,8 +6,10 @@ There are a couple of steps to get setup and run the pipeline that will generate
 
 ### Account & API Token
 - Sign-up and create an account with [ihc-attribution.com](https://login.ihc-attribution.com)
-- Run `cp .env.example .env`, then copy the API token that is provided on the overview page,
-- Save the token in the `.env` file.
+- Run the command below, then copy the API token that is provided on the overview page and save it in the `.env` file.
+```bash
+cp .env.example .env
+```
 
 ### Environment
 We can now create a virtual environment and install packages:
