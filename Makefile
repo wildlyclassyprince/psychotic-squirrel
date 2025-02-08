@@ -18,7 +18,6 @@ help: ## Display this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort  | awk 'BEGIN {FS = ":.*?##"}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 install: ## Install challenge dependencies in virtual environment
-	python3 -m venv venv && . venv/bin/activate
 	pip install -U pip -r requirements.txt
 
 db-ready: ## Extract database from zip file

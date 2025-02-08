@@ -14,6 +14,7 @@ cp .env.example .env
 ### Environment
 We can now create a virtual environment and install packages:
 ```bash
+python3 -m venv venv && . venv/bin/activate
 make install
 ```
 
