@@ -173,5 +173,5 @@ cython_debug/
 # Other
 .virtual_documents
 challenge.db
-training_data.json
-channel_reporting.csv
+#training_data.json
+#channel_reporting.csv
