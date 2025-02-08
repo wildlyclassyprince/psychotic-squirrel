@@ -66,5 +66,6 @@ make help
     - Reuse and decorate functions with `@task`
     - Make modifications to functions and handle passing data between tasks
     - Adding a schedule to automate report generation
+    - Adding `inserted_date` and `updated_date` as basic metadata on report creation
 
 ***
