@@ -24,18 +24,9 @@ daily_channel_metrics AS (
         "date",
         COUNT(DISTINCT session_id) as visits,
         COUNT(DISTINCT conversion_id) as conversions,
-        case 
-            when SUM(revenue * ihc) is null then 0
-            else SUM(revenue * ihc)
-        end as ihc_revenue,
-        case
-            when SUM(ihc) is null then 0
-            else SUM(ihc)
-        end as ihc,
-        case
-            when SUM(cost) is null then 0
-            else SUM(cost)
-        end as cost
+        COALESCE(SUM(revenue * ihc), 0) as ihc_revenue,
+        COALESCE(SUM(ihc), 0) as ihc,
+        COALESCE(SUM(cost), 0) as cost
     FROM attributed_sessions
     GROUP BY 
         channel_name,
