@@ -54,6 +54,6 @@ SELECT
     d.channel_name,
     d."date",
     d.cost,
-    d.ihc,
-    d.ihc_revenue
+    round(d.ihc, 2) as ihc,
+    round(d.ihc_revenue, 2) as ihc_revenue
 FROM daily_channel_metrics d;
