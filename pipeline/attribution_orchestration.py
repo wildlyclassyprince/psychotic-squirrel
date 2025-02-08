@@ -172,9 +172,6 @@ def process_api_response(
                 method="multi",
             )
 
-            logger.info(f"Purge {table_name} before inserting data ...")
-            _purge_table(table_name=table_name)
-
             logger.info(
                 f"Performing upsert from '{temp_table_name}' into '{table_name}'"
             )
@@ -249,7 +246,9 @@ def build_channel_reporting(
         _purge_table(table_name="channel_reporting")
 
         with _connect_to_sqlite_db() as conn:
+            conn.execute("BEGIN TRANSACTION;")
             conn.execute(query)
+            conn.execute("COMMIT;")
             logger.info("Successfully created channel report!")
             return True
     except sqlite3.IntegrityError as e:
@@ -354,6 +353,8 @@ def main():
     logger.info("============================================")
 
     logger.info("Starting to send requests in chunks ...")
+    logger.info("Purge attribution_customer_journey before inserting data ...")
+    _purge_table(table_name="attribution_customer_journey")
     if total_records > 0:
         counter = 1
         for start_idx in range(0, total_records, CHUNK_SIZE):
